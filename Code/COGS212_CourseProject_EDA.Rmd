@@ -23,7 +23,7 @@ library(ggplot2)
 
 Read in data: 
 ```{r}
-df_raw <- read.csv(here("county_migration_data.csv")) 
+df_raw <- read.csv(here("Data/county_migration_data.csv")) 
 ```
 
 Check the packaging:
@@ -262,6 +262,7 @@ This plot looks at how the number of migrants has changed over time:
 ```{r}
 
 ggplot(df_state_agg, aes(x = year, y = migrants_year, group = 1)) +
+  labs(x = "Year", y = "Number of Migrants") + 
   geom_line()+
   geom_point()
 
@@ -317,9 +318,9 @@ ggplot(df_state_agg, aes(x=reorder(origin_state_name, -migrants_origin), y=migra
 
 origin_10 <- subset(df_state_agg, origin_state_name %in% c("California", "Texas", "New York", "Florida", "Illinois", "Pennsylvania", "Ohio", "Michigan", "New Jersey", "Georgia"))
 
-ggplot(destination_10, aes(x=reorder(destination_state_name, -migrants_destination), y=migrants_destination)) + 
+ggplot(origin_10, aes(x=reorder(origin_state_name, -migrants_origin), y=migrants_origin)) + 
   geom_bar(stat = "identity") + 
-  labs(x = "State Name (Destination)", y = "Number of Migrants")
+  labs(x = "State Name (Origin)", y = "Number of Migrants")
 
 ```
 
